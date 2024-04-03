@@ -10,10 +10,29 @@ THRESHOLD = 10  # Adjust this threshold as needed
 def count_differences(file1, file2):
     """Count the number of differences between two text files."""
     with open(file1, 'r') as f1, open(file2, 'r') as f2:
-        f1n: list = [line.replace("//", "") for line in f1.readlines()]
-        f2n: list = [line.replace("//", "") for line in f2.readlines()]
+        f1n: list = strip_characters(f1.readlines())
+        f2n: list = strip_characters(f2.readlines())
         diff = difflib.ndiff(f1n, f2n)
         return sum(1 for line in diff if line.startswith('+') or line.startswith('-'))
+
+
+# Remove characters that don't matter and are counted in differences (blank lines, whitespace, \n's, and comments).
+def strip_characters(file_lines: list[str]) -> list[str]:
+    first_copy: list = file_lines.copy()
+    stripped_lines: list = []
+    for line in first_copy:
+        line: str
+        if line == "\n":
+            continue
+
+        stripped_lines.append(
+            (line
+             .replace(" ", "")
+             .replace("//", "")
+             .replace("\n", ""))
+        )
+
+    return stripped_lines
 
 
 # Define the path to the Files folder
