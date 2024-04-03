@@ -1,7 +1,7 @@
 import os
 import re
 
-folder_path = "Files test (COPY TO AVOID RENAMING FILES)"
+folder_path = "Files"
 
 # Open all main .c files in the folder
 for file_name in os.listdir(folder_path):
