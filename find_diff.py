@@ -5,7 +5,9 @@ import difflib
 def count_differences(file1, file2):
     """Count the number of differences between two text files."""
     with open(file1, 'r') as f1, open(file2, 'r') as f2:
-        diff = difflib.ndiff(f1.readlines(), f2.readlines())
+        f1n: list = [line.replace("//", "") for line in f1.readlines()]
+        f2n: list = [line.replace("//", "") for line in f2.readlines()]
+        diff = difflib.ndiff(f1n, f2n)
         return sum(1 for line in diff if line.startswith('+') or line.startswith('-'))
 
 # Define the path to the Files folder

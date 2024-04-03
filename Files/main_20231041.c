@@ -84,9 +84,9 @@
 //    }
 //}
 //
-//void main(){
+void main(){
 //    int month;
 //    printf("Please enter number of month\n");
 //    scanf("%d",&month);
-//    getMonthDays(month);
-//}
+    getMonthDays(month);
+}
