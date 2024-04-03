@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-//20231041 alaa qubein
 //q1
 
 //void billcalculator(){
@@ -84,9 +83,9 @@
 //    }
 //}
 //
-//void main(){
+void main(){
 //    int month;
 //    printf("Please enter number of month\n");
 //    scanf("%d",&month);
-//    getMonthDays(month);
-//}
+    getMonthDays(month);
+}

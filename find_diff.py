@@ -19,11 +19,14 @@ file_list = os.listdir(folder_path)
 # Create an empty list to store the matching pairs
 matching_pairs = []
 
-#compare every file with every file
+# Create a set to store processed pairs to avoid repetitions
+processed_pairs = set()
+
+# Compare every file with every file
 for first_file in file_list:
     for file in file_list:
-        # Skip if the files are the same
-        if first_file == file:
+        # Skip if the files are the same or if the pair is already processed
+        if first_file == file or (first_file, file) in processed_pairs:
             continue
         
         # Count the number of differences between the two files
@@ -35,6 +38,10 @@ for first_file in file_list:
         # If the number of differences is within the threshold, add the pair to matching_pairs list
         if differences <= threshold:
             matching_pairs.append((first_file, file, {"differences": differences}))
+            # Add the pair and its reverse to processed_pairs set
+            processed_pairs.add((first_file, file))
+            processed_pairs.add((file, first_file))
+
 # Convert the matching_pairs list to a JSON string
 json_data = json.dumps(matching_pairs)
 
@@ -42,7 +49,7 @@ json_data = json.dumps(matching_pairs)
 with open('matching_pairs.json', 'w') as file:
     file.write(json_data)
 
-# list the suspected cheaters from the json file
+# List the suspected cheaters from the json file
 # {x,y, differences: z} # x and y are suspected of cheating with 4 differences
 
 # Open the JSON file and load the data
