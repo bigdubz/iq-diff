@@ -33,7 +33,8 @@ for file_name in os.listdir(folder_path):
             if len(comments_with_digits) > 1:
                 print(f"Check file: {file_name} for multiple student IDs")
                 continue  # Skip renaming if there are multiple IDs
-            #if there no ids also throw an error
+
+            # If there are no IDs also throw an error
             if len(comments_with_digits) == 0:
                 print(f"Check file: {file_name} no ID could be found")
                 continue
