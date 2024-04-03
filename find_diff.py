@@ -3,6 +3,10 @@ import json
 import difflib
 
 
+# Set the threshold for maximum allowable differences
+THRESHOLD = 10  # Adjust this threshold as needed
+
+
 def count_differences(file1, file2):
     """Count the number of differences between two text files."""
     with open(file1, 'r') as f1, open(file2, 'r') as f2:
@@ -13,7 +17,7 @@ def count_differences(file1, file2):
 
 
 # Define the path to the Files folder
-folder_path = 'Files'
+folder_path = "Files"
 
 # Get a list of all files in the folder
 file_list = os.listdir(folder_path)
@@ -34,11 +38,8 @@ for first_file in file_list:
         # Count the number of differences between the two files
         differences = count_differences(os.path.join(folder_path, first_file), os.path.join(folder_path, file))
 
-        # Set the threshold for maximum allowable differences
-        threshold = 10  # Adjust this threshold as needed
-
         # If the number of differences is within the threshold, add the pair to matching_pairs list
-        if differences <= threshold:
+        if differences <= THRESHOLD:
             matching_pairs.append([first_file, file, differences])
             # Add the pair and its reverse to processed_pairs set
             processed_pairs.add((first_file, file))
