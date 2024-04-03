@@ -57,8 +57,8 @@ for first_file in file_list:
         differences = count_differences(os.path.join(folder_path, first_file), os.path.join(folder_path, file))
 
         # If the number of differences is within the threshold, add the pair to matching_pairs list
-        if differences <= THRESHOLD:
-            matching_pairs.append([first_file, file, differences])
+        if differences <= THRESHOLD+2:
+            matching_pairs.append([first_file, file, differences-2])
             # Add the pair and its reverse to processed_pairs set
             processed_pairs.add((first_file, file))
             processed_pairs.add((file, first_file))
@@ -66,4 +66,4 @@ for first_file in file_list:
 # Loop through the data and print the suspected cheaters
 # [x, y, z], x and y are suspected of cheating with z differences
 for pair in matching_pairs:
-    print(f"{pair[0]} and {pair[1]} are suspected of cheating with {pair[2]} differences.")
+    print(f"{pair[0]} and {pair[1]} are suspected of cheating with {pair[2]} differences in thier code.")
