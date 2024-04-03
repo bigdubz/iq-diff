@@ -19,19 +19,22 @@ file_list = os.listdir(folder_path)
 # Create an empty list to store the matching pairs
 matching_pairs = []
 
-# Compare the first file with every other file
-first_file = file_list[0]
-for file in file_list[1:]:
-    # Count the number of differences between the files
-    differences = count_differences(os.path.join(folder_path, first_file), os.path.join(folder_path, file))
-    
-    # Set the threshold for maximum allowable differences
-    threshold = 10  # Adjust this threshold as needed
-    
-    # If the number of differences is within the threshold, add the pair to matching_pairs list
-    if differences <= threshold:
-        matching_pairs.append((first_file, file, {"differences": differences}))
-
+#compare every file with every file
+for first_file in file_list:
+    for file in file_list:
+        # Skip if the files are the same
+        if first_file == file:
+            continue
+        
+        # Count the number of differences between the two files
+        differences = count_differences(os.path.join(folder_path, first_file), os.path.join(folder_path, file))
+        
+        # Set the threshold for maximum allowable differences
+        threshold = 10  # Adjust this threshold as needed
+        
+        # If the number of differences is within the threshold, add the pair to matching_pairs list
+        if differences <= threshold:
+            matching_pairs.append((first_file, file, {"differences": differences}))
 # Convert the matching_pairs list to a JSON string
 json_data = json.dumps(matching_pairs)
 
